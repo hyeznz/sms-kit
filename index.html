@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이사짐캐리 문자 키트</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+  :root {
+    --bg:        #1a1917;
+    --surface:   #2c2c2a;
+    --surface2:  #222220;
+    --surface3:  #353533;
+    --border:    rgba(255,255,255,0.08);
+    --border-mid:rgba(255,255,255,0.16);
+    --text:      #f1efe8;
+    --text-sub:  #b4b2a9;
+    --text-hint: #888780;
+    --teal:      #1D9E75;
+    --teal-bg:   #04342C;
+    --teal-text: #9FE1CB;
+    --blue:      #378ADD;
+    --blue-bg:   #042C53;
+    --blue-text: #B5D4F4;
+    --amber:     #EF9F27;
+    --amber-bg:  #412402;
+    --amber-text:#FAC775;
+    --red:       #E24B4A;
+    --red-bg:    #501313;
+    --red-text:  #F7C1C1;
+    --purple:    #9B6FE8;
+    --purple-bg: #2A1850;
+    --purple-text:#D4BAFF;
+    --radius:    14px;
+    --radius-sm:  8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── 헤더 ── */
+  .topbar {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .topbar-row1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.75rem;
+  }
+
+  .logo-mark {
+    width: 30px; height: 30px;
+    background: var(--teal);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-mark svg { width: 16px; height: 16px; }
+
+  .logo-text h1 { font-size: 15px; font-weight: 700; line-height: 1.2; }
+  .logo-text p  { font-size: 11px; color: var(--text-hint); }
+
+  /* ── 이름 선택 ── */
+  .name-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .name-label {
+    font-size: 11px;
+    color: var(--text-hint);
+    white-space: nowrap;
+  }
+
+  .name-pills {
+    display: flex;
+    background: var(--surface3);
+    border-radius: 20px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .name-pill {
+    font-size: 13px; font-weight: 700;
+    font-family: inherit;
+    padding: 5px 14px;
+    border-radius: 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+
+  .name-pill.active {
+    background: var(--teal);
+    color: #fff;
+  }
+
+  /* ── 탭 ── */
+  .tabs-row {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-top: 0.1rem;
+  }
+  .tabs-row::-webkit-scrollbar { display: none; }
+
+  .tab {
+    font-size: 13px; font-weight: 500;
+    font-family: inherit;
+    padding: 10px 14px;
+    border: none;
+    background: transparent;
+    color: var(--text-hint);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all .15s;
+    flex-shrink: 0;
+  }
+
+  .tab.active {
+    color: var(--teal);
+    border-bottom-color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* ── 리스트 영역 ── */
+  .list-body {
+    padding: 1rem 1rem 3rem;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ── 카드 ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag {
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .tag-fav    { background: #2a2000; color: #f0c040; }
+  .tag-quote  { background: var(--purple-bg); color: var(--purple-text); }
+  .tag-pre    { background: var(--teal-bg);   color: var(--teal-text); }
+  .tag-day    { background: var(--blue-bg);   color: var(--blue-text); }
+  .tag-post   { background: var(--amber-bg);  color: var(--amber-text); }
+  .tag-issue  { background: var(--red-bg);    color: var(--red-text); }
+
+  .card-title { font-size: 14px; font-weight: 700; flex: 1; line-height: 1.3; }
+
+  .star-btn {
+    background: none; border: none;
+    font-size: 18px; cursor: pointer;
+    padding: 2px 4px;
+    line-height: 1;
+    flex-shrink: 0;
+    opacity: .45;
+    transition: opacity .15s, transform .15s;
+  }
+  .star-btn.on { opacity: 1; }
+  .star-btn:active { transform: scale(1.3); }
+
+  .card-body { padding: 0.85rem 1rem 1rem; }
+
+  .hint {
+    font-size: 12px;
+    color: var(--text-hint);
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .sms-text {
+    background: var(--surface2);
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-bottom: 0.8rem;
+  }
+
+  .copy-btn {
+    width: 100%;
+    padding: 11px;
+    font-size: 14px; font-weight: 700; font-family: inherit;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: var(--teal);
+    color: #fff;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    transition: all .15s;
+  }
+  .copy-btn:active { transform: scale(0.98); opacity: .85; }
+  .copy-btn.done   { background: #155e3e; }
+
+  .empty {
+    text-align: center;
+    color: var(--text-hint);
+    font-size: 14px;
+    padding: 3.5rem 0;
+    line-height: 2;
+  }
+  .empty strong { display: block; font-size: 28px; margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-row1">
+    <div class="logo-mark">
+      <svg viewBox="0 0 17 17" fill="none">
+        <rect x="1.5" y="4" width="14" height="10" rx="2" stroke="white" stroke-width="1.4"/>
+        <path d="M5.5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" stroke="white" stroke-width="1.4"/>
+        <path d="M8.5 8v3M7 9.5h3" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <h1>이사짐캐리 문자 키트</h1>
+      <p>현장매니저 전용</p>
+    </div>
+    <div class="name-selector">
+      <span class="name-label">발신자</span>
+      <div class="name-pills">
+        <button class="name-pill active" onclick="selectName(0,this)">김현규</button>
+        <button class="name-pill" onclick="selectName(1,this)">김종인</button>
+      </div>
+    </div>
+  </div>
+  <div class="tabs-row">
+    <button class="tab active" onclick="filter('fav',this)">⭐ 즐겨찾기</button>
+    <button class="tab" onclick="filter('quote',this)">견적 예약</button>
+    <button class="tab" onclick="filter('pre',this)">이사 전날</button>
+    <button class="tab" onclick="filter('day',this)">이사 당일</button>
+    <button class="tab" onclick="filter('post',this)">이사 후</button>
+    <button class="tab" onclick="filter('issue',this)">돌발상황</button>
+  </div>
+</div>
+
+<div class="list-body" id="list"></div>
+
+<script>
+/* ── 이름 ── */
+const NAMES = [
+  { name: '김현규', title: '대표' },
+  { name: '김종인', title: '현장매니저' },
+];
+let selectedNameIdx = 0;
+
+function selectName(idx, btn) {
+  selectedNameIdx = idx;
+  document.querySelectorAll('.name-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function applyName(text) {
+  const { name, title } = NAMES[selectedNameIdx];
+  const full = `${title} ${name}`;
+  return text
+    .replace(/\[팀장명\]/g, full)
+    .replace(/\[담당자명\]/g, full)
+    .replace(/\[고객명\]\s*고객님/g, '이사짐캐리 고객님')
+    .replace(/\[고객명\]/g, '이사짐캐리 고객님');
+}
+
+/* ── 즐겨찾기 ── */
+let favs = new Set(JSON.parse(localStorage.getItem('sms_favs') || '[]'));
+
+function toggleFav(idx, btn) {
+  if (favs.has(idx)) { favs.delete(idx); btn.classList.remove('on'); btn.textContent = '☆'; }
+  else               { favs.add(idx);    btn.classList.add('on');  btn.textContent = '★'; }
+  localStorage.setItem('sms_favs', JSON.stringify([...favs]));
+  if (currentCat === 'fav') render();
+}
+
+/* ── 데이터 ── */
+const data = [
+  /* 견적 예약 */
+  {
+    cat:'quote', tag:'견적 예약', tagClass:'tag-quote',
+    title:'견적 문의 접수 확인',
+    hint:'추가 교체 항목 없음',
+    sms:`안녕하세요, 이사짐캐리입니다 :)
+
+견적 문의 남겨주셨군요, 감사해요!
+담당 매니저가 빠르게 연락드릴게요.
+
+궁금하신 게 있으시면 편하게 문자 주세요.
+기다리게 하지 않겠습니다!`
+  },
+  {
+    cat:'quote', tag:'견적 예약', tagClass:'tag-quote',
+    title:'방문 견적 일정 안내',
+    hint:'[날짜], [시간] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리 [팀장명]입니다 :)
+
+방문 견적 일정 안내드려요.
+📅 [날짜] [시간]
+
+현장에서 직접 확인하고 정확하게 안내드릴게요.
+일정 변경 필요하시면 편하게 연락 주세요!`
+  },
+  {
+    cat:'quote', tag:'견적 예약', tagClass:'tag-quote',
+    title:'견적 완료 · 이사 확정 안내',
+    hint:'[이사날짜], [금액] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리입니다.
+
+오늘 시간 내주셔서 감사했어요 :)
+견적 금액: [금액]원
+이사 예정일: [이사날짜]
+
+확정하시면 바로 일정 잡아드릴게요.
+결정 어려우시면 편하게 여쭤봐도 됩니다!`
+  },
+  {
+    cat:'quote', tag:'견적 예약', tagClass:'tag-quote',
+    title:'이사 예약 확정 안내',
+    hint:'[이사날짜], [시간] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리입니다 :)
+
+이사 예약이 확정됐습니다!
+📅 [이사날짜] [시간] 방문 예정이에요.
+
+이사 전날 한 번 더 연락드릴게요.
+좋은 이사 되도록 최선 다하겠습니다!`
+  },
+
+  /* 이사 전날 */
+  {
+    cat:'pre', tag:'이사 전날', tagClass:'tag-pre',
+    title:'전날 방문 일정 안내',
+    hint:'[시간] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리 [팀장명]입니다 :)
+
+내일 이사 하루 전이네요!
+내일 [시간]에 찾아뵐게요.
+
+변경 사항 있으시면 편하게 연락 주세요.
+카카오톡이나 이 번호로 문자 주셔도 됩니다.
+
+내일 잘 부탁드립니다!`
+  },
+  {
+    cat:'pre', tag:'이사 전날', tagClass:'tag-pre',
+    title:'포장 소모품 사전 안내',
+    hint:'추가 교체 항목 없음',
+    sms:`안녕하세요, 이사짐캐리입니다!
+
+내일 이사 앞두고 한 가지 미리 알려드려요.
+박스·에어캡·테이프 등 포장 자재는 저희가 모두 챙겨갑니다.
+
+다만 귀중품·현금·중요 서류는 고객님이 직접 챙겨두시면 좋아요.
+나머지는 저희가 꼼꼼하게 챙길게요 :)`
+  },
+
+  /* 이사 당일 */
+  {
+    cat:'day', tag:'이사 당일', tagClass:'tag-day',
+    title:'출발 전 도착 예정 안내',
+    hint:'[출발지], [도착예정시간] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리입니다 :)
+
+지금 [출발지]에서 출발했어요.
+[도착예정시간]쯤 도착할 것 같아요.
+
+잠시만 기다려주세요, 바로 찾아갑니다!`
+  },
+  {
+    cat:'day', tag:'이사 당일', tagClass:'tag-day',
+    title:'작업 완료 · 정산 안내',
+    hint:'[금액] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리입니다.
+
+오늘 이사 잘 마무리됐습니다, 정말 수고 많으셨어요 :)
+
+최종 정산 금액은 [금액]원입니다.
+계좌이체·카드 모두 가능해요.
+
+새집에서 좋은 시작 되시길 바랍니다!`
+  },
+  {
+    cat:'day', tag:'이사 당일', tagClass:'tag-day',
+    title:'엘리베이터 예약 확인 요청',
+    hint:'[시간대] 를 교체하세요',
+    sms:`안녕하세요, 이사짐캐리입니다!
+
+작업이 더 원활하게 진행되려면 관리사무소에 이삿짐 엘리베이터([시간대]) 예약을 해주시면 정말 좋아요.
+
+아직 안 하셨다면 지금 연락해 주세요.
+최대한 빠르게 맞춰드릴게요!`
+  },
+
+  /* 이사 후 */
+  {
+    cat:'post', tag:'이사 후', tagClass:'tag-post',
+    title:'이사 완료 후 리뷰 요청',
+    hint:'[리뷰링크] 를 교체하세요. 링크 없으면 해당 줄 삭제',
+    sms:`안녕하세요, 이사짐캐리입니다 :)
+
+오늘 이사 수고 많으셨어요.
+저희는 매일 하는 일이지만, 이사가 얼마나 고단한지 잘 알아요.
+
+짐이 안전하게 잘 옮겨졌는지, 새 공간에 제대로 자리 잡으셨는지 — 지금 어떠세요?
+
+솔직한 후기 하나 남겨주실 수 있을까요?
+아직 작은 업체인 저희에겐 고객님 한 마디가 진짜 큰 힘이 돼요.
+좋았던 점도, 아쉬웠던 점도 다 괜찮습니다.
+▶ [리뷰링크]
+
+감사합니다. 또 필요하실 때 언제든 연락 주세요!`
+  },
+  {
+    cat:'post', tag:'이사 후', tagClass:'tag-post',
+    title:'AS 처리 안내',
+    hint:'[처리내용] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리 [담당자명]입니다.
+
+말씀해 주신 내용 확인했습니다.
+[처리내용]으로 처리해 드릴게요.
+
+불편하게 해드려서 진심으로 죄송합니다.
+빠르게 해결될 수 있도록 제가 직접 챙기겠습니다.`
+  },
+
+  /* 돌발상황 */
+  {
+    cat:'issue', tag:'돌발상황', tagClass:'tag-issue',
+    title:'지연 도착 안내',
+    hint:'[지연사유], [새도착시간] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리입니다.
+
+죄송해요, [지연사유]로 인해 도착이 조금 늦어지고 있어요.
+[새도착시간]쯤 도착할 것 같습니다.
+
+기다리시게 해서 정말 죄송합니다.
+최대한 빠르게 이동하고 있어요!`
+  },
+  {
+    cat:'issue', tag:'돌발상황', tagClass:'tag-issue',
+    title:'추가 비용 발생 사전 고지',
+    hint:'[추가내용], [추가금액] 을 교체하세요. 반드시 구두 동의 먼저!',
+    sms:`안녕하세요, 이사짐캐리입니다.
+
+현장 확인 중에 [추가내용]이 생겨서 먼저 알려드려요.
+추가 금액: [추가금액]원
+
+진행 전 꼭 동의 받고 싶어서 연락드렸어요.
+괜찮으시면 바로 진행할게요.
+
+불편하게 해드려서 죄송합니다.`
+  },
+  {
+    cat:'issue', tag:'돌발상황', tagClass:'tag-issue',
+    title:'파손 · 분실 즉시 안내',
+    hint:'[물품명], [처리방안] 을 교체하세요. 사진 먼저 촬영!',
+    sms:`안녕하세요, 이사짐캐리입니다.
+
+작업 중 [물품명]에 손상이 생겨서 바로 알려드립니다.
+[처리방안]으로 처리해 드릴게요.
+
+사진도 함께 보내드릴게요.
+정말 죄송합니다. 자세한 건 전화로 말씀드릴게요.`
+  },
+  {
+    cat:'issue', tag:'돌발상황', tagClass:'tag-issue',
+    title:'고객 부재 시 메시지',
+    hint:'[도착시간] 을 교체하세요',
+    sms:`안녕하세요, 이사짐캐리입니다.
+
+[도착시간]에 도착했는데 연락이 닿지 않고 있어요.
+이 문자 보시면 바로 연락 주시면 감사드릴게요!
+
+전화 어려우시면 문자로 회신 주셔도 됩니다 :)`
+  },
+];
+
+/* ── 탭 ── */
+let currentCat = 'fav';
+
+function filter(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+/* ── 렌더 ── */
+function render() {
+  const list = document.getElementById('list');
+  let items;
+
+  if (currentCat === 'fav') {
+    items = [...favs].map(i => ({ d: data[i], idx: i }));
+  } else {
+    items = data
+      .map((d, i) => ({ d, idx: i }))
+      .filter(({ d }) => d.cat === currentCat);
+  }
+
+  if (!items.length) {
+    list.innerHTML = currentCat === 'fav'
+      ? '<div class="empty"><strong>☆</strong>즐겨찾기한 문자가 없어요.<br>카드 오른쪽 ☆을 눌러 추가하세요.</div>'
+      : '<div class="empty">해당 상황 없음</div>';
+    return;
+  }
+
+  list.innerHTML = items.map(({ d, idx }) => cardHTML(d, idx)).join('');
+}
+
+function cardHTML(d, idx) {
+  const isFav = favs.has(idx);
+  const smsRendered = applyName(d.sms);
+  return `
+  <div class="card" id="card-${idx}">
+    <div class="card-head">
+      <span class="tag ${d.tagClass}">${d.tag}</span>
+      <span class="card-title">${d.title}</span>
+      <button class="star-btn ${isFav ? 'on' : ''}" onclick="toggleFav(${idx},this)">${isFav ? '★' : '☆'}</button>
+    </div>
+    <div class="card-body">
+      <div class="hint">✏️ ${d.hint}</div>
+      <div class="sms-text" id="sms-${idx}">${smsRendered}</div>
+      <button class="copy-btn" id="btn-${idx}" onclick="copyText(${idx})">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="4.5" y="4.5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M2.5 9.5V2.5h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        문자 복사하기
+      </button>
+    </div>
+  </div>`;
+}
+
+function copyText(idx) {
+  const text = document.getElementById('sms-' + idx).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btn-' + idx);
+    btn.classList.add('done');
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg> 복사 완료!`;
+    setTimeout(() => {
+      btn.classList.remove('done');
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x="4.5" y="4.5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M2.5 9.5V2.5h7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg> 문자 복사하기`;
+    }, 2500);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
