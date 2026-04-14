@@ -64,30 +64,41 @@
     margin-bottom: 0.75rem;
   }
 
-  .logo-mark {
-    width: 30px; height: 30px;
-    background: var(--teal);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
   }
-  .logo-mark svg { width: 16px; height: 16px; }
-
-  .logo-text h1 { font-size: 15px; font-weight: 700; line-height: 1.2; }
-  .logo-text p  { font-size: 11px; color: var(--text-hint); }
+  .title-line1 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .title-line2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+  }
+  .logo-text p { font-size: 11px; color: var(--text-hint); margin-top: 2px; }
 
   /* ── 이름 선택 ── */
   .name-selector {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
     margin-left: auto;
   }
 
   .name-label {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--text-hint);
     white-space: nowrap;
+    letter-spacing: 0.03em;
   }
 
   .name-pills {
@@ -248,15 +259,9 @@
 
 <div class="topbar">
   <div class="topbar-row1">
-    <div class="logo-mark">
-      <svg viewBox="0 0 17 17" fill="none">
-        <rect x="1.5" y="4" width="14" height="10" rx="2" stroke="white" stroke-width="1.4"/>
-        <path d="M5.5 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" stroke="white" stroke-width="1.4"/>
-        <path d="M8.5 8v3M7 9.5h3" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    </div>
     <div class="logo-text">
-      <h1>이사짐캐리 문자 키트</h1>
+      <span class="title-line1">이사짐캐리</span>
+      <span class="title-line2">문자 키트</span>
       <p>현장매니저 전용</p>
     </div>
     <div class="name-selector">
