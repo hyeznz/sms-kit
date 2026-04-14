@@ -64,37 +64,17 @@
     margin-bottom: 0.75rem;
   }
 
-  .logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-  }
-  .title-line1 {
+  .logo-text h1 {
     font-size: 16px;
-    font-weight: 900;
+    font-weight: 700;
     color: var(--text);
     white-space: nowrap;
-    letter-spacing: -0.01em;
-    display: block;
+    line-height: 1.2;
   }
-  .title-row2 {
-    display: flex;
-    align-items: flex-end;
-    gap: 5px;
-  }
-  .title-line2 {
-    font-size: 20px; /* JS가 line1 너비에 맞게 자동 조정 */
-    font-weight: 900;
-    color: var(--text);
-    white-space: nowrap;
-    display: inline-block;
-  }
-  .title-caption {
-    font-size: 9px;
+  .logo-text p {
+    font-size: 11px;
     color: var(--text-hint);
-    white-space: nowrap;
-    margin-bottom: 2px;
-    letter-spacing: 0.01em;
+    margin-top: 1px;
   }
 
   /* ── 이름 선택 ── */
@@ -272,11 +252,8 @@
 <div class="topbar">
   <div class="topbar-row1">
     <div class="logo-text">
-      <span class="title-line1">이사짐캐리</span>
-      <div class="title-row2">
-        <span class="title-line2">문자 키트</span>
-        <span class="title-caption">현장매니저 전용</span>
-      </div>
+      <h1>이사짐캐리 문자 키트</h1>
+      <p>현장매니저 전용</p>
     </div>
     <div class="name-selector">
       <span class="name-label">발신자</span>
@@ -299,32 +276,6 @@
 <div class="list-body" id="list"></div>
 
 <script>
-/* ── 타이틀 Dynamic Text: line2를 line1 너비에 맞게 font-size 자동 조정 ── */
-function fitTitleLines() {
-  const line1 = document.querySelector('.title-line1');
-  const line2 = document.querySelector('.title-line2');
-  if (!line1 || !line2) return;
-  line2.style.fontSize = ''; // 초기화
-  requestAnimationFrame(() => {
-    const w1 = line1.getBoundingClientRect().width;
-    const w2 = line2.getBoundingClientRect().width;
-    if (w1 > 0 && w2 > 0) {
-      const base = parseFloat(getComputedStyle(line2).fontSize);
-      line2.style.fontSize = (base * w1 / w2).toFixed(2) + 'px';
-    }
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  // 폰트 로드 후 재계산 (웹폰트 로딩 지연 대비)
-  if (document.fonts) {
-    document.fonts.ready.then(fitTitleLines);
-  } else {
-    setTimeout(fitTitleLines, 300);
-  }
-  fitTitleLines();
-});
-
 /* ── 이름 ── */
 const NAMES = [
   { name: '김현규', title: '대표' },
